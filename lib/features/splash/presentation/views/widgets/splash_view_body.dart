@@ -1,5 +1,7 @@
+import 'package:book_app_clean_arch/core/routes/app_router.dart';
 import 'package:book_app_clean_arch/core/utils/app_styles.dart';
 import 'package:book_app_clean_arch/core/utils/assets.dart';
+import 'package:book_app_clean_arch/core/utils/extension.dart';
 import 'package:flutter/material.dart';
 
 class SplashViewBody extends StatefulWidget {
@@ -9,7 +11,29 @@ class SplashViewBody extends StatefulWidget {
   State<SplashViewBody> createState() => _SplashViewBodyState();
 }
 
-class _SplashViewBodyState extends State<SplashViewBody> {
+class _SplashViewBodyState extends State<SplashViewBody> with SingleTickerProviderStateMixin {
+  late final AnimationController animationController;
+  late final Animation<Offset> slidingAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    animationController = AnimationController(vsync: this, duration: const Duration(seconds: 1));
+
+    initSlidingAnimation();
+
+    animationController.forward();
+
+    navigationToLoginScreen();
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose(); // Don't forget to dispose the controller
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -17,8 +41,26 @@ class _SplashViewBodyState extends State<SplashViewBody> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Image.asset(Assets.assetsImagesLogo),
-        Center(child: Text('Read Book For Free', style: AppStyles.textStyle18)),
+        Center(
+          child: SlideTransition(
+            position: slidingAnimation,
+            child: Text('Read Book For Free', style: AppStyles.textStyle18),
+          ),
+        ),
       ],
     );
+  }
+
+  Animation<Offset> initSlidingAnimation() {
+    return slidingAnimation = Tween<Offset>(
+      begin: const Offset(0, 2),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(parent: animationController, curve: Curves.easeIn));
+  }
+
+  Future<void> navigationToLoginScreen() {
+    return Future.delayed(const Duration(seconds: 2), () {
+      context.pushReplacementNamed(AppRouter.login);
+    });
   }
 }

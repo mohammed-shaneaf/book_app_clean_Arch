@@ -9,10 +9,7 @@ class BookApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        scaffoldBackgroundColor: AppColors.primaryColor,
-        brightness: Brightness.dark,
-      ),
+      theme: ThemeData(scaffoldBackgroundColor: AppColors.primaryColor, brightness: Brightness.dark),
       debugShowCheckedModeBanner: false,
       onGenerateRoute: RoutingApp.generateRoutes,
       initialRoute: AppRouter.splash,
