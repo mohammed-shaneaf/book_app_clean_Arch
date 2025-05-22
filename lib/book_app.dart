@@ -1,5 +1,6 @@
 import 'package:book_app_clean_arch/core/routes/app_router.dart';
 import 'package:book_app_clean_arch/core/routes/routing_app.dart';
+import 'package:book_app_clean_arch/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class BookApp extends StatelessWidget {
@@ -7,7 +8,12 @@ class BookApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      theme: ThemeData(
+        scaffoldBackgroundColor: AppColors.primaryColor,
+        brightness: Brightness.dark,
+      ),
+      debugShowCheckedModeBanner: false,
       onGenerateRoute: RoutingApp.generateRoutes,
       initialRoute: AppRouter.splash,
     );
