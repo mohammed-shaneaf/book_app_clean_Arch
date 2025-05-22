@@ -5,13 +5,13 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class LoginViewBody extends StatelessWidget {
-  const LoginViewBody({super.key});
+class RegisterViewBody extends StatelessWidget {
+  const RegisterViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Padding(
+      child: (Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -19,47 +19,56 @@ class LoginViewBody extends StatelessWidget {
             90.verticalSpace,
             Center(child: Image.asset(Assets.assetsImagesLogo, height: 100.h)),
             40.verticalSpace,
-            Text(
-              'Welcome Back!',
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
+            Text('Welcome!', style: Theme.of(context).textTheme.headlineSmall),
             10.verticalSpace,
             Text(
-              'Please login to your account',
+              'Create your account',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             30.verticalSpace,
-            const CustomTextFormField(
+            CustomTextFormField(
+              hintText: 'Name',
+              keyboardType: TextInputType.emailAddress,
+            ),
+            20.verticalSpace,
+            CustomTextFormField(
+              hintText: 'Phone Number',
+              keyboardType: TextInputType.emailAddress,
+            ),
+            20.verticalSpace,
+            CustomTextFormField(
               hintText: 'Email',
               keyboardType: TextInputType.emailAddress,
             ),
             20.verticalSpace,
-            const CustomTextFormField(hintText: 'Password', obscureText: true),
+            CustomTextFormField(hintText: 'Password', obscureText: true),
             30.verticalSpace,
             SizedBox(
               width: double.infinity,
               height: 48.h,
               child: ElevatedButton(
-                onPressed: () {},
-                child: const Text('Login'),
+                onPressed: () {
+                  // TODO: Register logic
+                },
+                child: const Text('Register'),
               ),
             ),
             30.verticalSpace,
             Center(
               child: RichText(
                 text: TextSpan(
-                  text: "Don't have an account? ",
+                  text: "Already have an account? ",
                   style: Theme.of(context).textTheme.bodyMedium,
                   children: [
                     TextSpan(
-                      text: 'Register here!',
+                      text: 'Login here!',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: Theme.of(context).colorScheme.primary,
                         fontWeight: FontWeight.bold,
                       ),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          Navigator.pushNamed(context, AppRouter.register);
+                          Navigator.pushNamed(context, AppRouter.login);
                         },
                     ),
                   ],
@@ -68,7 +77,7 @@ class LoginViewBody extends StatelessWidget {
             ),
           ],
         ),
-      ),
+      )),
     );
   }
 }

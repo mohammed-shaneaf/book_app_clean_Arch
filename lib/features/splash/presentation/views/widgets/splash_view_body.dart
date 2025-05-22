@@ -50,6 +50,12 @@ class _SplashViewBodyState extends State<SplashViewBody> with SingleTickerProvid
     );
   }
 
+  /*************  ✨ Windsurf Command ⭐  *************/
+  /// Navigate to login screen after 2 seconds delay.
+  ///
+  /// This method is used to navigate to login screen after a short delay.
+  /// It is useful for splash screen.
+  /*******  759a3443-1615-43d8-aacd-3bdf5a83acb6  *******/
   Future<void> navigationToLoginScreen() {
     return Future.delayed(const Duration(seconds: 2), () {
       Navigator.pushReplacementNamed(context, AppRouter.login);
